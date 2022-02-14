@@ -19,5 +19,6 @@ a {
 
 * {
   font-family: 'Roboto', sans-serif;
+  letter-spacing: 1px;
   box-sizing: border-box;
 }

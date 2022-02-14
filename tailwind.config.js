@@ -5,9 +5,19 @@ module.exports = {
 	],
 	theme: {
 		fontFamily: {
-			'sans-serif': ["Roboto", "sans-serif"],
+			"sans-serif": ["Roboto", "sans-serif"],
 		},
-		extend: {},
+		extend: {
+			colors: {
+				primary: {
+					dark: "#111e26",
+					DEFAULT: "#233d4d",
+				},
+			},
+			transitionDuration: {
+				0: "0ms",
+			},
+		},
 	},
 	plugins: [],
 };
