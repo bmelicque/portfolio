@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useWindowWidth from "../lib/hooks/useWindowWidth";
+import useWindowDimensions from "../lib/hooks/useWindowDimensions";
 
 interface NavLink {
 	href: string;
@@ -48,10 +48,10 @@ function NavLink({ href, children }: NavLink) {
 
 export default function Header() {
 	const [isExpanded, setIsExpanded] = useState(false);
-	const windowWidth = useWindowWidth();
+	const { windowWidth } = useWindowDimensions();
 
 	return (
-		<header className="bg-primary text-white flex content-center">
+		<header className="bg-primary text-white flex content-center sticky top-0 z-10">
 			<div className="container mx-auto flex flex-col md:flex-row justify-end items-end">
 				<button
 					onClick={() => setIsExpanded((curr) => !curr)}
@@ -60,7 +60,7 @@ export default function Header() {
 					<Hamburger active={isExpanded} />
 				</button>
 				<nav
-					className="uppercase md:flex flex-col md:flex-row md:gap-2 text-xl duration-200 md:duration-0"
+					className="uppercase md:flex flex-col md:flex-row md:gap-2 text-lg duration-200 md:duration-0"
 					style={{
 						height:
 							windowWidth > BREAKPOINT

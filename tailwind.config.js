@@ -10,8 +10,13 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: {
-					dark: "#111e26",
-					DEFAULT: "#233d4d",
+					darker: "#19212b",
+					dark: "#223140",
+					DEFAULT: "#324156",
+				},
+				secondary: {
+					dark: "#923b25",
+					DEFAULT: "#c35532",
 				},
 			},
 			transitionDuration: {
