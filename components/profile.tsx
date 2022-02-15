@@ -1,16 +1,20 @@
 import { Heading, SubHeading } from "./headings";
+import { Skill, LANGUAGES } from "../lib/data/skills";
 
 // Skill Item
-interface Skill {
-	icon?: string;
-	name: string;
-	value: number;
-}
-
 function Skill({ icon, name, value }: Skill) {
 	return (
-		<li>
-			{name} {value}
+		<li className="grid grid-cols-12 items-center">
+			<span className="col-span-4">
+				{!!icon && <i>I</i>}
+				{name}
+			</span>
+			<span className="col-span-8 relative inline-block bg-gray-300 h-2 rounded">
+				<span
+					className="absolute inline-block bg-primary h-2 w-full rounded origin-left"
+					style={{ transform: `scaleX(${value / 100})` }}
+				></span>
+			</span>
 		</li>
 	);
 }
@@ -26,8 +30,8 @@ function SkillList({ category, skills }: SkillList) {
 		<section>
 			<SubHeading>{category}</SubHeading>
 			<ul>
-				{skills.map(({ name, value }) => (
-					<Skill name={name} value={value} />
+				{skills.map(({ icon, name, value }) => (
+					<Skill key={name} icon={icon} name={name} value={value} />
 				))}
 			</ul>
 		</section>
@@ -40,23 +44,9 @@ export default function Profile() {
 		<section className="container mx-auto py-16 px-0.5">
 			<Heading>Mes compétences</Heading>
 
-			<SkillList
-				category="Langages et frameworks"
-				skills={[
-					{
-						name: "Nom",
-						value: 2,
-					},
-					{
-						name: "Nom",
-						value: 3,
-					},
-					{
-						name: "Nom",
-						value: 1,
-					},
-				]}
-			/>
+			<div id="skills-container" className="grid grid-cols-3">
+				<SkillList category="Langages et frameworks" skills={LANGUAGES} />
+			</div>
 		</section>
 	);
 }
