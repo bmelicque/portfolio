@@ -1,7 +1,7 @@
 export interface Skill {
 	icon?: string;
 	name: string;
-	value: number;
+	value?: number;
 }
 
 export const LANGUAGES: Skill[] = [
@@ -92,16 +92,6 @@ export const DATABASES: Skill[] = [
 
 export const ENVIRONMENT: Skill[] = [
 	{
-		icon: "git.png",
-		name: "Git",
-		value: 75,
-	},
-	{
-		icon: "github.png",
-		name: "GitHub",
-		value: 60,
-	},
-	{
 		icon: "postman.png",
 		name: "Postman",
 		value: 30,
@@ -125,5 +115,48 @@ export const ENVIRONMENT: Skill[] = [
 		icon: "vscode.png",
 		name: "Visual Studio Code",
 		value: 70,
+	},
+];
+
+export const METHODOLOGIES: Skill[] = [
+	{
+		icon: "agile.png",
+		name: "Méthodes Agiles",
+		value: 40,
+	},
+	{
+		icon: "trello.png",
+		name: "Trello",
+		value: 20,
+	},
+	{
+		icon: "jira.png",
+		name: "Jira",
+		value: 20,
+	},
+	{
+		icon: "git.png",
+		name: "Git",
+		value: 75,
+	},
+	{
+		icon: "github.png",
+		name: "GitHub",
+		value: 60,
+	},
+];
+
+export const HUMAN_SKILLS: Skill[] = [
+	{
+		name: "Rigueur",
+	},
+	{
+		name: "Autonomie",
+	},
+	{
+		name: "Adaptabilité",
+	},
+	{
+		name: "Curiosité",
 	},
 ];

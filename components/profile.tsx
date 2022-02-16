@@ -1,5 +1,12 @@
 import { Heading, SubHeading } from "./headings";
-import { Skill, LANGUAGES, DATABASES, ENVIRONMENT } from "../lib/data/skills";
+import {
+	Skill,
+	LANGUAGES,
+	DATABASES,
+	ENVIRONMENT,
+	METHODOLOGIES,
+	HUMAN_SKILLS,
+} from "../lib/data/skills";
 import Image from "next/image";
 
 const ICON_PATH_ROOT = "/assets/logos/";
@@ -61,6 +68,10 @@ export default function Profile() {
 				<div>
 					<SkillList category="Bases de données" skills={DATABASES} />
 					<SkillList category="Environnement" skills={ENVIRONMENT} />
+				</div>
+				<div>
+					<SkillList category="Méthodologies" skills={METHODOLOGIES} />
+					<SkillList category="Qualités et valeurs" skills={HUMAN_SKILLS} />
 				</div>
 			</div>
 		</section>
