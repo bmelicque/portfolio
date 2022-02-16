@@ -1,25 +1,26 @@
+// Fixer menu mobile
+// Responsive
+
 import Image from "next/image";
 import Photo from "../public/assets/banner_photo.jpg";
 import { TopHeading } from "./headings";
 
+// Links
 interface BannerLink {
 	href: string;
 	color: string;
 	children: React.ReactChild;
 }
 
+const COLORS_MAP = {
+	PRIMARY: "bg-primary hover:bg-primary-dark text-white",
+	SECONDARY: "bg-secondary hover:bg-secondary-dark text-white",
+	WHITE: "bg-white hover:bg-gray-200 text-gray-900",
+};
+
 function BannerLink({ href, color, children }: BannerLink) {
-	const colorClass =
-		color === "primary"
-			? "bg-primary hover:bg-primary-dark text-white"
-			: color === "secondary"
-			? "bg-secondary hover:bg-secondary-dark text-white"
-			: color === "white"
-			? "bg-white hover:bg-gray-200 text-gray-900"
-			: "";
-
+	const colorClass = COLORS_MAP[color];
 	if (!colorClass) return null;
-
 	return (
 		<a
 			href={href}
@@ -30,16 +31,16 @@ function BannerLink({ href, color, children }: BannerLink) {
 	);
 }
 
+// Complete component
 export default function Banner() {
 	return (
 		<section className="relative">
 			<div
 				id="image-wrapper"
-				className="bg-red-900 relative"
-				style={{ height: "calc(100vh - 3rem)" }}
+				className="bg-red-900 relative h-screen"
 			>
 				{/* Image by Arnold Francisca @clark-fransa */}
-				<Image src={Photo} layout="fill" objectFit="cover" />
+				<Image src={Photo} layout="fill" objectFit="cover" alt="" />
 			</div>
 			<div
 				id="text-wrapper"
@@ -49,7 +50,7 @@ export default function Banner() {
 					id="banner-text-container"
 					className="container mx-auto relative w-full h-full"
 				>
-					<div className="absolute w-2/5 text-white h-full top-0 right-0 flex flex-col justify-center gap-8">
+					<div className="absolute w-full md:w-2/3 lg:w-1/2 xl:w-2/5 px-8 md:px-0 text-white h-full top-0 right-0 flex flex-col justify-center gap-8">
 						<TopHeading>Bastien Mélicque – Développeur web</TopHeading>
 						<p className="text-3xl font-bold">
 							Je développe votre projet web en utilisant des technologies
@@ -60,10 +61,10 @@ export default function Banner() {
 							faire vivre vos projets en m&apos;adaptant aux contraintes.
 						</p>
 						<div id="link-wrapper" className="flex gap-6 mt-4">
-							<BannerLink href="" color="white">
+							<BannerLink href="" color="WHITE">
 								En savoir plus...
 							</BannerLink>
-							<BannerLink href="" color="secondary">
+							<BannerLink href="" color="SECONDARY">
 								Contactez-moi !
 							</BannerLink>
 						</div>

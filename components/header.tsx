@@ -51,7 +51,7 @@ export default function Header() {
 	const { windowWidth } = useWindowDimensions();
 
 	return (
-		<header className="bg-primary text-white flex content-center sticky top-0 z-10">
+		<header className="bg-primary text-white flex content-center fixed w-full z-10 overflow-hidden">
 			<div className="container mx-auto flex flex-col md:flex-row justify-end items-end">
 				<button
 					onClick={() => setIsExpanded((curr) => !curr)}
