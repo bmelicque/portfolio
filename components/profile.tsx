@@ -8,9 +8,27 @@ import {
 	HUMAN_SKILLS,
 } from "../lib/data/skills";
 import Image from "next/image";
+import { useState } from "react";
 
 const ICON_PATH_ROOT = "/assets/logos/";
 const ICON_SIZE = 24;
+
+// Unfold button
+interface UnfoldButton {
+	active?: boolean;
+	toggleState: () => void;
+}
+
+function UnfoldButton({ active, toggleState }: UnfoldButton) {
+	const rotation = active ? "rotate-45" : "-rotate-135";
+	const className =
+		"block sm:hidden w-3 h-3 border-gray-600 border-r-2 border-b-2 " + rotation;
+	return (
+		<button onClick={toggleState}>
+			<span className={className}></span>
+		</button>
+	);
+}
 
 // Skill Item
 function Skill({ icon, name, value }: Skill) {
@@ -45,10 +63,24 @@ interface SkillList {
 }
 
 function SkillList({ category, skills }: SkillList) {
+	const [unfolded, setUnfolded] = useState(false);
+
 	return (
 		<section>
-			<SubHeading>{category}</SubHeading>
-			<ul className="flex flex-col gap-3	mb-10">
+			<SubHeading>
+				<span className="w-full flex justify-between">
+					{category}{" "}
+					<UnfoldButton
+						active={unfolded}
+						toggleState={() => setUnfolded((current) => !current)}
+					/>
+				</span>
+			</SubHeading>
+			<ul
+				className={`${
+					unfolded ? "flex" : "hidden"
+				} sm:flex flex-col gap-3 mb-10`}
+			>
 				{skills.map(({ icon, name, value }) => (
 					<Skill key={name} icon={icon} name={name} value={value} />
 				))}
@@ -60,10 +92,13 @@ function SkillList({ category, skills }: SkillList) {
 // Complete component
 export default function Profile() {
 	return (
-		<section className="container mx-auto py-16 px-0.5">
+		<section className="container mx-auto py-16 px-4 sm:px-0.5">
 			<Heading>Mes compétences</Heading>
 
-			<div id="skills-container" className="grid grid-cols-3 gap-24">
+			<div
+				id="skills-container"
+				className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 sm:gap-16 lg:gap-24"
+			>
 				<SkillList category="Langages et frameworks" skills={LANGUAGES} />
 				<div>
 					<SkillList category="Bases de données" skills={DATABASES} />

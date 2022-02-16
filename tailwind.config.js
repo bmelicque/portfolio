@@ -22,6 +22,9 @@ module.exports = {
 			transitionDuration: {
 				0: "0ms",
 			},
+			rotate: {
+				135: "135deg",
+			},
 		},
 	},
 	plugins: [],
