@@ -71,3 +71,59 @@ export const LANGUAGES: Skill[] = [
 		value: 65,
 	},
 ];
+
+export const DATABASES: Skill[] = [
+	{
+		icon: "mongo.png",
+		name: "MongoDB",
+		value: 40,
+	},
+	{
+		icon: "mysql.png",
+		name: "MySQL",
+		value: 60,
+	},
+	{
+		icon: "sequelize.png",
+		name: "Sequelize",
+		value: 50,
+	},
+];
+
+export const ENVIRONMENT: Skill[] = [
+	{
+		icon: "git.png",
+		name: "Git",
+		value: 75,
+	},
+	{
+		icon: "github.png",
+		name: "GitHub",
+		value: 60,
+	},
+	{
+		icon: "postman.png",
+		name: "Postman",
+		value: 30,
+	},
+	{
+		icon: "xampp.png",
+		name: "XAMPP",
+		value: 20,
+	},
+	{
+		icon: "ssh.png",
+		name: "SSH",
+		value: 70,
+	},
+	{
+		icon: "linux.png",
+		name: "Linux",
+		value: 10,
+	},
+	{
+		icon: "vscode.png",
+		name: "Visual Studio Code",
+		value: 70,
+	},
+];

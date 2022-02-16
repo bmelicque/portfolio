@@ -1,5 +1,5 @@
 import { Heading, SubHeading } from "./headings";
-import { Skill, LANGUAGES } from "../lib/data/skills";
+import { Skill, LANGUAGES, DATABASES, ENVIRONMENT } from "../lib/data/skills";
 import Image from "next/image";
 
 const ICON_PATH_ROOT = "/assets/logos/";
@@ -41,7 +41,7 @@ function SkillList({ category, skills }: SkillList) {
 	return (
 		<section>
 			<SubHeading>{category}</SubHeading>
-			<ul className="flex flex-col gap-3	">
+			<ul className="flex flex-col gap-3	mb-10">
 				{skills.map(({ icon, name, value }) => (
 					<Skill key={name} icon={icon} name={name} value={value} />
 				))}
@@ -58,6 +58,10 @@ export default function Profile() {
 
 			<div id="skills-container" className="grid grid-cols-3 gap-24">
 				<SkillList category="Langages et frameworks" skills={LANGUAGES} />
+				<div>
+					<SkillList category="Bases de données" skills={DATABASES} />
+					<SkillList category="Environnement" skills={ENVIRONMENT} />
+				</div>
 			</div>
 		</section>
 	);
