@@ -1,6 +1,3 @@
-// Fixer menu mobile
-// Responsive
-
 import Image from "next/image";
 import Photo from "../public/assets/banner_photo.jpg";
 import { TopHeading } from "./headings";
