@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Banner from "../components/banner";
 import Header from "../components/header";
+import Portfolio from "../components/portfolio";
 import Profile from "../components/profile";
 
 export default function Home() {
@@ -14,7 +15,7 @@ export default function Home() {
 			<Header />
 			<Banner />
 			<Profile />
-			<div style={{ height: "200vh" }}></div>
+			<Portfolio />
 		</div>
 	);
 }
