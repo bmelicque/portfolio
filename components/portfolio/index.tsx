@@ -1,5 +1,6 @@
-import { Dispatch, useEffect, useReducer, useRef, useState } from "react";
-import { Heading } from "./headings";
+import { useEffect, useReducer, useRef, useState } from "react";
+import { Heading } from "../headings";
+import ArrowButton from "./arrowButton";
 
 const TEST_ARRAY = [
 	{
@@ -10,45 +11,7 @@ const TEST_ARRAY = [
 	},
 ];
 
-// Arrow buttons
-interface ArrowProps {
-	type: "left" | "right";
-	onClick: Dispatch<any>;
-}
-
-const BUTTON_STYLE_MAP = {
-	left: "left-0",
-	right: "right-0",
-};
-
-const STYLE_MAP = {
-	left: "border-l-2 border-b-2 rotate-45 right-2",
-	right: "border-r-2 border-b-2 -rotate-45 left-2",
-};
-
-function ArrowButton({ type, onClick }: ArrowProps) {
-	const buttonClass =
-		BUTTON_STYLE_MAP[type] +
-		" absolute w-12 h-16 top-1/2 -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-60 duration-100";
-	const className =
-		STYLE_MAP[type] + " absolute border-black w-5 h-5 top-1/2 -translate-y-1/2";
-
-	return (
-		<button
-			className={buttonClass}
-			onClick={() =>
-				onClick({
-					type: type === "right" ? ACTIONS.DISPLAY_NEXT : ACTIONS.DISPLAY_PREV,
-				})
-			}
-		>
-			<span className={className}></span>
-		</button>
-	);
-}
-
-// Main component
-const ACTIONS = {
+export const ACTIONS = {
 	DISPLAY_NEXT: "display next",
 	DISPLAY_PREV: "display prev",
 };
