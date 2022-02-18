@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef, useState } from "react";
+import { Dispatch, useEffect, useReducer, useRef, useState } from "react";
 import { Heading } from "./headings";
 
 const TEST_ARRAY = [
@@ -10,9 +10,47 @@ const TEST_ARRAY = [
 	},
 ];
 
+// Arrow buttons
+interface ArrowProps {
+	type: "left" | "right";
+	onClick: Dispatch<any>;
+}
+
+const BUTTON_STYLE_MAP = {
+	left: "left-0",
+	right: "right-0",
+};
+
+const STYLE_MAP = {
+	left: "border-l-2 border-b-2 rotate-45 right-2",
+	right: "border-r-2 border-b-2 -rotate-45 left-2",
+};
+
+function ArrowButton({ type, onClick }: ArrowProps) {
+	const buttonClass =
+		BUTTON_STYLE_MAP[type] +
+		" absolute w-12 h-16 top-1/2 -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-60 duration-100";
+	const className =
+		STYLE_MAP[type] + " absolute border-black w-5 h-5 top-1/2 -translate-y-1/2";
+
+	return (
+		<button
+			className={buttonClass}
+			onClick={() =>
+				onClick({
+					type: type === "right" ? ACTIONS.DISPLAY_NEXT : ACTIONS.DISPLAY_PREV,
+				})
+			}
+		>
+			<span className={className}></span>
+		</button>
+	);
+}
+
+// Main component
 const ACTIONS = {
 	DISPLAY_NEXT: "display next",
-	DISPLAY_PREV: "display_prev",
+	DISPLAY_PREV: "display prev",
 };
 
 const reducer = (state, action) => {
@@ -50,10 +88,10 @@ export default function Portfolio() {
 	return (
 		<section className="py-16 bg-gray-100">
 			<Heading>Mes réalisations</Heading>
-			<div className="container mx-auto" ref={carouselRef}>
+			<div className="container mx-auto relative" ref={carouselRef}>
 				<div
 					id="carousel"
-					className="flex duration-500"
+					className="flex duration-300"
 					style={{
 						transform: `translateX(-${state.current * carouselWidth}px)`,
 					}}
@@ -61,7 +99,7 @@ export default function Portfolio() {
 					{TEST_ARRAY.map((item, index) => (
 						<div
 							key={item.background}
-							className="container h-96 shrink-0 duration-500"
+							className="container h-96 shrink-0 duration-300"
 							style={{
 								...item,
 								transform: `scale(${index === state.current ? 1 : 0.95})`,
@@ -70,16 +108,8 @@ export default function Portfolio() {
 						></div>
 					))}
 				</div>
-				<button
-					id="arrow-left"
-					className="border-l-2 border-b-2 border-black w-5 h-5 rotate-45"
-					onClick={() => dispatch({ type: ACTIONS.DISPLAY_PREV })}
-				></button>
-				<button
-					id="arrow-right"
-					className="border-r-2 border-b-2 border-black w-5 h-5 -rotate-45"
-					onClick={() => dispatch({ type: ACTIONS.DISPLAY_NEXT })}
-				></button>
+				<ArrowButton type="left" onClick={dispatch} />
+				<ArrowButton type="right" onClick={dispatch} />
 			</div>
 		</section>
 	);
