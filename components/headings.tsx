@@ -8,7 +8,7 @@ export function TopHeading({ children }: Props) {
 
 export function Heading({ children }: Props) {
 	return (
-		<h2 className="text-2xl uppercase text-center text-primary-dark font-normal mb-5">
+		<h2 className="text-2xl uppercase text-center text-primary-dark font-normal mb-8">
 			{children}
 		</h2>
 	);

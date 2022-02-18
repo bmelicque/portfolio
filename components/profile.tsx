@@ -8,8 +8,8 @@ import {
 	HUMAN_SKILLS,
 } from "../lib/data/skills";
 import Image from "next/image";
-import { useRef, useState, useEffect, MutableRefObject } from "react";
-import useScroll from "../lib/hooks/usScroll";
+import React, { useRef, useState } from "react";
+import useViewport from "../lib/hooks/useViewport";
 
 const ICON_PATH_ROOT = "/assets/logos/";
 const ICON_SIZE = 24;
@@ -31,58 +31,54 @@ function UnfoldButton({ active, toggleState }: UnfoldButton) {
 	);
 }
 
-// Skill Item
-function useViewport(ref: MutableRefObject<HTMLElement>) {
-	const [visible, setVisible] = useState(false);
+// Wraps elements that fade in on scroll
+function FadingWrapper({ children }: { children: React.ReactElement }) {
+	const ref = useRef<HTMLElement>();
+	const visible = useViewport(ref);
 
-	useEffect(() => {
-		function handleScroll() {
-			const { top, bottom } = ref?.current?.getBoundingClientRect?.();
-			const isInViewPort = top > 0 && bottom < window.innerHeight;
-			setVisible(isInViewPort);
-		}
-
-		window.addEventListener("scroll", () => handleScroll());
-		return window.removeEventListener("scroll", () => handleScroll());
-	}, [ref]);
-
-	return visible;
+	return (
+		<span
+			ref={ref}
+			className="inline-block duration-500 delay-200"
+			style={{
+				transform: `translateX(${visible ? 0 : "1rem"})
+					translateY(${visible ? 0 : "-0.5rem"})`,
+				opacity: visible ? 1 : 0,
+			}}
+		>
+			{children}
+		</span>
+	);
 }
 
+// Skill Item
 function Skill({ icon, name, value }: Skill) {
 	const ref = useRef<HTMLLIElement>();
 	const visible = useViewport(ref);
 
-	useEffect(() => console.log(visible), [visible]);
-
 	return (
-		<li
-			ref={ref}
-			className="grid grid-cols-12 items-center duration-500 delay-200"
-			style={{
-				transform: `translateY(${visible ? 0 : "2rem"})`,
-				opacity: visible ? 1 : 0,
-			}}
-		>
-			<span className="col-span-5 flex gap-2">
-				{!!icon && (
-					<Image
-						src={ICON_PATH_ROOT + icon}
-						width={ICON_SIZE}
-						height={ICON_SIZE}
-						objectFit="contain"
-						alt=""
-					/>
-				)}
-				{name}
-			</span>
-			<span className="col-span-7 relative inline-block bg-gray-300 h-2 rounded overflow-hidden">
-				<span
-					className="absolute inline-block bg-primary h-2 w-full rounded-lg origin-left duration-500 delay-300"
-					style={{ transform: `scaleX(${visible ? value / 100 || 1 : 0})` }}
-				></span>
-			</span>
-		</li>
+		<FadingWrapper>
+			<li ref={ref} className="grid grid-cols-12 items-center">
+				<span className="col-span-5 flex gap-2">
+					{!!icon && (
+						<Image
+							src={ICON_PATH_ROOT + icon}
+							width={ICON_SIZE}
+							height={ICON_SIZE}
+							objectFit="contain"
+							alt=""
+						/>
+					)}
+					{name}
+				</span>
+				<span className="col-span-7 relative inline-block bg-gray-300 h-2 rounded overflow-hidden">
+					<span
+						className="absolute inline-block bg-primary h-2 w-full rounded-lg origin-left duration-500 delay-300"
+						style={{ transform: `scaleX(${visible ? value / 100 || 1 : 0})` }}
+					></span>
+				</span>
+			</li>
+		</FadingWrapper>
 	);
 }
 
@@ -97,15 +93,17 @@ function SkillList({ category, skills }: SkillList) {
 
 	return (
 		<section>
-			<SubHeading>
-				<span className="w-full flex justify-between">
-					{category}{" "}
-					<UnfoldButton
-						active={unfolded}
-						toggleState={() => setUnfolded((current) => !current)}
-					/>
-				</span>
-			</SubHeading>
+			<FadingWrapper>
+				<SubHeading>
+					<span className="w-full flex justify-between">
+						{category}{" "}
+						<UnfoldButton
+							active={unfolded}
+							toggleState={() => setUnfolded((current) => !current)}
+						/>
+					</span>
+				</SubHeading>
+			</FadingWrapper>
 			<ul
 				className={`${
 					unfolded ? "flex" : "hidden"
