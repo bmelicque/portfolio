@@ -8,7 +8,8 @@ import {
 	HUMAN_SKILLS,
 } from "../lib/data/skills";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState, useEffect, MutableRefObject } from "react";
+import useScroll from "../lib/hooks/usScroll";
 
 const ICON_PATH_ROOT = "/assets/logos/";
 const ICON_SIZE = 24;
@@ -31,9 +32,38 @@ function UnfoldButton({ active, toggleState }: UnfoldButton) {
 }
 
 // Skill Item
+function useViewport(ref: MutableRefObject<HTMLElement>) {
+	const [visible, setVisible] = useState(false);
+
+	useEffect(() => {
+		function handleScroll() {
+			const { top, bottom } = ref?.current?.getBoundingClientRect?.();
+			const isInViewPort = top > 0 && bottom < window.innerHeight;
+			setVisible(isInViewPort);
+		}
+
+		window.addEventListener("scroll", () => handleScroll());
+		return window.removeEventListener("scroll", () => handleScroll());
+	}, [ref]);
+
+	return visible;
+}
+
 function Skill({ icon, name, value }: Skill) {
+	const ref = useRef<HTMLLIElement>();
+	const visible = useViewport(ref);
+
+	useEffect(() => console.log(visible), [visible]);
+
 	return (
-		<li className="grid grid-cols-12 items-center">
+		<li
+			ref={ref}
+			className="grid grid-cols-12 items-center duration-500 delay-200"
+			style={{
+				transform: `translateY(${visible ? 0 : "2rem"})`,
+				opacity: visible ? 1 : 0,
+			}}
+		>
 			<span className="col-span-5 flex gap-2">
 				{!!icon && (
 					<Image
@@ -48,8 +78,8 @@ function Skill({ icon, name, value }: Skill) {
 			</span>
 			<span className="col-span-7 relative inline-block bg-gray-300 h-2 rounded overflow-hidden">
 				<span
-					className="absolute inline-block bg-primary h-2 w-full rounded-lg origin-left"
-					style={{ transform: `scaleX(${value / 100})` }}
+					className="absolute inline-block bg-primary h-2 w-full rounded-lg origin-left duration-500 delay-300"
+					style={{ transform: `scaleX(${visible ? value / 100 || 1 : 0})` }}
 				></span>
 			</span>
 		</li>
