@@ -1,6 +1,8 @@
 import { useEffect, useReducer, useRef, useState } from "react";
+import { PROJECTS } from "../../lib/data/projects";
 import { Heading } from "../headings";
 import ArrowButton from "./arrowButton";
+import ProjectCard from "./projectCard";
 
 const TEST_ARRAY = [
 	{
@@ -31,9 +33,10 @@ const reducer = (state, action) => {
 };
 
 export default function Portfolio() {
+	const projects = PROJECTS;
 	const [state, dispatch] = useReducer(reducer, {
 		current: 0,
-		items: TEST_ARRAY,
+		items: projects,
 	});
 	const carouselRef = useRef<HTMLDivElement>();
 	const [carouselWidth, setCarouselWidth] = useState<number>(undefined);
@@ -59,16 +62,17 @@ export default function Portfolio() {
 						transform: `translateX(-${state.current * carouselWidth}px)`,
 					}}
 				>
-					{TEST_ARRAY.map((item, index) => (
+					{projects.map((project, index) => (
 						<div
-							key={item.background}
-							className="container h-96 shrink-0 duration-300"
+							key={index}
+							className="container shrink-0 duration-300"
 							style={{
-								...item,
 								transform: `scale(${index === state.current ? 1 : 0.95})`,
 								opacity: index === state.current ? 1 : 0.6,
 							}}
-						></div>
+						>
+							<ProjectCard project={project} />
+						</div>
 					))}
 				</div>
 				<ArrowButton type="left" onClick={dispatch} />
