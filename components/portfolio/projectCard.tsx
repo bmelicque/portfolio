@@ -9,8 +9,9 @@ interface Props {
 }
 
 export default function ProjectCard({
-	project: { name, address, image, context, missions, stack },
+	project: { name, address, github, image, context, missions, stack },
 }: Props) {
+	console.log(github);
 	return (
 		<div className="flex flex-col items-start">
 			<div className="ml-24">
@@ -24,11 +25,22 @@ export default function ProjectCard({
 					objectFit="cover"
 				/>
 			</div>
-			<div className="px-16 grid grid-cols-2 gap-16">
+			<div className="px-16 grid grid-cols-3 gap-x-16 gap-y-4">
 				<div>
 					<ContentItem title="Contexte :">
 						<p>{context.text}</p>
 					</ContentItem>
+				</div>
+				<div className="col-span-2">
+					<ContentItem title="Mes missions">
+						<ul>
+							{missions.map((mission, i) => (
+								<li key={i}>– {mission}</li>
+							))}
+						</ul>
+					</ContentItem>
+				</div>
+				<div className="col-span-3">
 					<ContentItem title="Stack utilisé :">
 						<ul className="flex gap-1 pl-5 mt-1">
 							{stack.map((tech) => (
@@ -42,17 +54,19 @@ export default function ProjectCard({
 						</ul>
 					</ContentItem>
 				</div>
-				<ContentItem title="Mes missions">
-					<ul>
-						{missions.map((mission, i) => (
-							<li key={i}>– {mission}</li>
-						))}
-					</ul>
-				</ContentItem>
 			</div>
-			<ButtonLink href={address} target="_blank" color="SECONDARY">
-				Voir le site
-			</ButtonLink>
+			<div className="flex gap-8 justify-center self-center">
+				<ButtonLink
+					href={github}
+					target="_blank"
+					color={github ? "BLACK" : "DISABLED"}
+				>
+					{github ? "Voir le repo" : "Repo privé"}
+				</ButtonLink>
+				<ButtonLink href={address} target="_blank" color="SECONDARY">
+					Voir le site
+				</ButtonLink>
+			</div>
 		</div>
 	);
 }

@@ -24,7 +24,7 @@ export const PROJECTS: Project[] = [
 		},
 		context: {
 			type: "Mission",
-			text: "Ma première mission dans un cadre professionnel. Le client (un photographe) souhaitait un site vitrine avec une partie privée pour livrer ses photos et mettre à jour la partie publique.",
+			text: "Ma première mission dans un cadre professionnel. Le client (un photographe) souhaitait un site vitrine, avec une partie privée pour livrer ses photos à ses clients.",
 		},
 		missions: [
 			"Intégrer la maquette choisie pour la partie publique",
@@ -38,6 +38,7 @@ export const PROJECTS: Project[] = [
 	{
 		name: "Bastien Mélicque – Portfolio",
 		address: "",
+		github: "https://github.com/bmelicque/portfolio",
 		image: {
 			src: "/assets/images/portfolio.png",
 			alt: "La page d'accueil : quelques lignes de présentation",
@@ -62,7 +63,7 @@ export const PROJECTS: Project[] = [
 		},
 		context: {
 			type: "Projet personnel",
-			text: "Le projet qui m'a donné envie de faire du web: la construction d'un dictionnaire bilingue en ligne.",
+			text: "Le projet qui m'a donné envie de faire du web : la construction d'un dictionnaire bilingue en ligne.",
 		},
 		missions: [
 			"Designer et intégrer l'interface",
