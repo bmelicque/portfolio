@@ -42,13 +42,13 @@ export default function ProjectCard({
 				</div>
 				<div className="lg:col-span-3">
 					<ContentItem title="Stack utilisé :">
-						<ul className="flex flex-wrap gap-1 pl-5 mt-1">
+						<ul className="flex flex-wrap gap-2 pl-5 mt-1">
 							{stack.map((tech) => (
 								<li
 									key={tech}
-									className="border indent-0 rounded-full px-2 py-1 bg-white text-primary-dark"
+									className="border indent-0 rounded-r rounded-l-2xl px-2 py-1 bg-white text-primary-dark"
 								>
-									{tech}
+									• {tech}
 								</li>
 							))}
 						</ul>
