@@ -1,24 +1,33 @@
 import { useEffect, useReducer, useRef, useState } from "react";
-import { PROJECTS } from "../../lib/data/projects";
+import { Project, PROJECTS } from "../../lib/data/projects";
 import { Heading } from "../headings";
 import ArrowButton from "./arrowButton";
 import ProjectCard from "./projectCard";
 
-const TEST_ARRAY = [
-	{
-		background: "blue",
-	},
-	{
-		background: "red",
-	},
-];
-
-export const ACTIONS = {
-	DISPLAY_NEXT: "display next",
-	DISPLAY_PREV: "display prev",
+const SCALE = {
+	FOCUS: 1,
+	BLUR: 0.95,
+};
+const OPACITY = {
+	FOCUS: 1,
+	BLUR: 0.6,
 };
 
-const reducer = (state, action) => {
+export enum ACTIONS {
+	DISPLAY_NEXT = "NEXT",
+	DISPLAY_PREV = "PREV",
+}
+
+interface Action {
+	type: ACTIONS;
+}
+
+interface State {
+	current: number;
+	items: Project[];
+}
+
+const reducer = (state: State, action: Action) => {
 	const { current, items } = state;
 	switch (action.type) {
 		case ACTIONS.DISPLAY_NEXT:
@@ -67,8 +76,10 @@ export default function Portfolio() {
 							key={index}
 							className="container shrink-0 duration-300"
 							style={{
-								transform: `scale(${index === state.current ? 1 : 0.95})`,
-								opacity: index === state.current ? 1 : 0.6,
+								transform: `scale(${
+									index === state.current ? SCALE.FOCUS : SCALE.BLUR
+								})`,
+								opacity: index === state.current ? OPACITY.FOCUS : OPACITY.BLUR,
 							}}
 						>
 							<ProjectCard project={project} />

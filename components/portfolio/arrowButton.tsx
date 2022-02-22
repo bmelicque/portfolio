@@ -11,7 +11,7 @@ const BUTTON_STYLE_MAP = {
 	right: "right-0",
 };
 
-const STYLE_MAP = {
+const ARROW_STYLE_MAP = {
 	left: "border-l-2 border-b-2 rotate-45 right-2",
 	right: "border-r-2 border-b-2 -rotate-45 left-2",
 };
@@ -19,9 +19,9 @@ const STYLE_MAP = {
 export default function ArrowButton({ type, onClick }: ArrowProps) {
 	const buttonClass =
 		BUTTON_STYLE_MAP[type] +
-		" absolute w-12 h-16 top-1/2 -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-60 duration-100";
+		" absolute w-12 h-16 hover:w-16 top-1/2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-70 duration-100";
 	const className =
-		STYLE_MAP[type] + " absolute border-black w-5 h-5 top-1/2 -translate-y-1/2";
+		ARROW_STYLE_MAP[type] + " absolute border-black w-5 h-5 top-1/2 -translate-y-1/2";
 
 	return (
 		<button
