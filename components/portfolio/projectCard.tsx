@@ -25,13 +25,13 @@ export default function ProjectCard({
 					objectFit="cover"
 				/>
 			</div>
-			<div className="px-16 grid grid-cols-3 gap-x-16 gap-y-4">
+			<div className="px-16 grid grid-cols-1 lg:grid-cols-3 gap-x-16 gap-y-4">
 				<div>
 					<ContentItem title="Contexte :">
 						<p>{context.text}</p>
 					</ContentItem>
 				</div>
-				<div className="col-span-2">
+				<div className="lg:col-span-2">
 					<ContentItem title="Mes missions">
 						<ul>
 							{missions.map((mission, i) => (
@@ -40,9 +40,9 @@ export default function ProjectCard({
 						</ul>
 					</ContentItem>
 				</div>
-				<div className="col-span-3">
+				<div className="lg:col-span-3">
 					<ContentItem title="Stack utilisé :">
-						<ul className="flex gap-1 pl-5 mt-1">
+						<ul className="flex flex-wrap gap-1 pl-5 mt-1">
 							{stack.map((tech) => (
 								<li
 									key={tech}
@@ -55,7 +55,7 @@ export default function ProjectCard({
 					</ContentItem>
 				</div>
 			</div>
-			<div className="flex gap-8 justify-center self-center">
+			<div className="mt-4 flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center self-center">
 				<ButtonLink
 					href={github}
 					target="_blank"
