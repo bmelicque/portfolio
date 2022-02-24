@@ -53,7 +53,6 @@ export default function Header() {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const { scrollToRef } = useContext(NavContext);
 	const { windowWidth } = useWindowDimensions();
-	const test = scrollToRef(SECTION_NAMES.banner);
 
 	return (
 		<header className="bg-primary text-white flex content-center fixed w-full z-10 overflow-hidden">
@@ -75,16 +74,16 @@ export default function Header() {
 								: 0,
 					}}
 				>
-					<NavLink href="" onClick={scrollToRef(SECTION_NAMES.banner)}>
+					<NavLink href="#Accueil" onClick={scrollToRef(SECTION_NAMES.banner)}>
 						Accueil
 					</NavLink>
-					<NavLink href="" onClick={scrollToRef(SECTION_NAMES.profile)}>
+					<NavLink href="#Compétences" onClick={scrollToRef(SECTION_NAMES.profile)}>
 						Compétences
 					</NavLink>
-					<NavLink href="" onClick={scrollToRef(SECTION_NAMES.portfolio)}>
+					<NavLink href="#Réalisations" onClick={scrollToRef(SECTION_NAMES.portfolio)}>
 						Réalisations
 					</NavLink>
-					<NavLink href="" onClick={scrollToRef(SECTION_NAMES.portfolio)}>
+					<NavLink href="#Contact" onClick={scrollToRef(SECTION_NAMES.contact)}>
 						Contact
 					</NavLink>
 				</nav>

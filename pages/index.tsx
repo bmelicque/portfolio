@@ -6,18 +6,6 @@ import Profile from "../components/profile";
 import { useContext } from "react";
 import { NavContext } from "../lib/context/navContext";
 
-export enum Sections {
-	banner = "banner",
-	profile = "profile",
-	portfolio = "portfolio",
-}
-
-export const SECTION_NAMES = {
-	banner: "banner",
-	profile: "profile",
-	portfolio: "portfolio",
-};
-
 export default function Home() {
 	const { refs } = useContext(NavContext);
 

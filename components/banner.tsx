@@ -2,8 +2,12 @@ import Image from "next/image";
 import Photo from "../public/assets/banner_photo.jpg";
 import ButtonLink from "./buttonLink";
 import { TopHeading } from "./headings";
+import { useContext } from "react";
+import { NavContext, SECTION_NAMES } from '../lib/context/navContext';
 
 export default function Banner() {
+	const { scrollToRef } = useContext(NavContext);
+
 	return (
 		<section className="relative">
 			<div id="image-wrapper" className="bg-red-900 relative h-screen">
@@ -29,10 +33,10 @@ export default function Banner() {
 							faire vivre vos projets en m&apos;adaptant aux contraintes.
 						</p>
 						<div id="link-wrapper" className="flex gap-6 mt-4">
-							<ButtonLink href="" color="WHITE">
+							<ButtonLink href="#Compétences" onClick={scrollToRef(SECTION_NAMES.profile)} color="WHITE">
 								En savoir plus...
 							</ButtonLink>
-							<ButtonLink href="" color="SECONDARY">
+							<ButtonLink href="#Contact" onClick={scrollToRef(SECTION_NAMES.contact)} color="SECONDARY">
 								Contactez-moi !
 							</ButtonLink>
 						</div>

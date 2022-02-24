@@ -1,6 +1,9 @@
+import { MouseEventHandler } from "react";
+
 interface Props {
 	href: string;
-	target: string;
+	target?: string;
+	onClick?: MouseEventHandler;
 	color: string;
 	disabled?: boolean;
 	children: React.ReactChild;
@@ -17,6 +20,7 @@ const COLORS_MAP = {
 export default function ButtonLink({
 	href,
 	target,
+	onClick,
 	color,
 	children,
 }: Props) {
@@ -26,7 +30,7 @@ export default function ButtonLink({
 	const className = `${colorClass} py-4 px-6 self-center rounded text-base uppercase`;
 
 	return (
-		<a href={href} target={target} className={className}>
+		<a href={href} target={target} onClick={onClick} className={className}>
 			{children}
 		</a>
 	);
