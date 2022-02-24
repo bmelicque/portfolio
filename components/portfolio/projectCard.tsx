@@ -46,7 +46,7 @@ export default function ProjectCard({
 							{stack.map((tech) => (
 								<li
 									key={tech}
-									className="border indent-0 rounded-r rounded-l-2xl px-2 py-1 bg-white text-primary-dark"
+									className="border border-gray-300 indent-0 rounded-r rounded-l-2xl px-2 py-1 bg-white text-primary-dark"
 								>
 									• {tech}
 								</li>

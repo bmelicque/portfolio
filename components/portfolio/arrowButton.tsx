@@ -16,16 +16,23 @@ const ARROW_STYLE_MAP = {
 	right: "border-r-2 border-b-2 -rotate-45 left-2",
 };
 
+const TITLE_MAP = {
+	left: "Afficher le précédent",
+	right: "Afficher le suivant",
+};
+
 export default function ArrowButton({ type, onClick }: ArrowProps) {
 	const buttonClass =
 		BUTTON_STYLE_MAP[type] +
 		" absolute w-12 h-16 hover:w-16 top-1/2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-70 duration-100";
 	const className =
-		ARROW_STYLE_MAP[type] + " absolute border-black w-5 h-5 top-1/2 -translate-y-1/2";
+		ARROW_STYLE_MAP[type] +
+		" absolute border-black w-5 h-5 top-1/2 -translate-y-1/2";
 
 	return (
 		<button
 			className={buttonClass}
+			title={TITLE_MAP[type]}
 			onClick={() =>
 				onClick({
 					type: type === "right" ? ACTIONS.DISPLAY_NEXT : ACTIONS.DISPLAY_PREV,
