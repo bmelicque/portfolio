@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { MouseEventHandler, useContext, useState } from "react";
 import useWindowDimensions from "../lib/hooks/useWindowDimensions";
+import { NavContext, SECTION_NAMES } from "../lib/context/navContext";
 
 interface NavLink {
 	href: string;
+	onClick: MouseEventHandler;
 	children: React.ReactChild;
 }
 
@@ -35,10 +37,11 @@ function Hamburger({ active }: Hamburger) {
 	);
 }
 
-function NavLink({ href, children }: NavLink) {
+function NavLink({ href, onClick, children }: NavLink) {
 	return (
 		<a
 			href={href}
+			onClick={onClick}
 			className="px-2 md:py-2 pr-8 md:pr-2 h-12 flex items-center cursor-pointer hover:bg-primary-dark"
 		>
 			{children}
@@ -48,7 +51,9 @@ function NavLink({ href, children }: NavLink) {
 
 export default function Header() {
 	const [isExpanded, setIsExpanded] = useState(false);
+	const { scrollToRef } = useContext(NavContext);
 	const { windowWidth } = useWindowDimensions();
+	const test = scrollToRef(SECTION_NAMES.banner);
 
 	return (
 		<header className="bg-primary text-white flex content-center fixed w-full z-10 overflow-hidden">
@@ -70,10 +75,18 @@ export default function Header() {
 								: 0,
 					}}
 				>
-					<NavLink href="">Accueil</NavLink>
-					<NavLink href="">Compétences</NavLink>
-					<NavLink href="">Réalisations</NavLink>
-					<NavLink href="">Contact</NavLink>
+					<NavLink href="" onClick={scrollToRef(SECTION_NAMES.banner)}>
+						Accueil
+					</NavLink>
+					<NavLink href="" onClick={scrollToRef(SECTION_NAMES.profile)}>
+						Compétences
+					</NavLink>
+					<NavLink href="" onClick={scrollToRef(SECTION_NAMES.portfolio)}>
+						Réalisations
+					</NavLink>
+					<NavLink href="" onClick={scrollToRef(SECTION_NAMES.portfolio)}>
+						Contact
+					</NavLink>
 				</nav>
 			</div>
 		</header>

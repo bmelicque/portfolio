@@ -3,8 +3,24 @@ import Banner from "../components/banner";
 import Header from "../components/header";
 import Portfolio from "../components/portfolio";
 import Profile from "../components/profile";
+import { useContext } from "react";
+import { NavContext } from "../lib/context/navContext";
+
+export enum Sections {
+	banner = "banner",
+	profile = "profile",
+	portfolio = "portfolio",
+}
+
+export const SECTION_NAMES = {
+	banner: "banner",
+	profile: "profile",
+	portfolio: "portfolio",
+};
 
 export default function Home() {
+	const { refs } = useContext(NavContext);
+
 	return (
 		<div>
 			<Head>
@@ -13,9 +29,15 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Header />
-			<Banner />
-			<Profile />
-			<Portfolio />
+			<div ref={refs.banner}>
+				<Banner />
+			</div>
+			<div ref={refs.profile}>
+				<Profile />
+			</div>
+			<div ref={refs.portfolio}>
+				<Portfolio />
+			</div>
 		</div>
 	);
 }
