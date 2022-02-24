@@ -33,7 +33,7 @@ export const PROJECTS: Project[] = [
 			"Designer et développer les parties administrateur et client du site",
 			"Envoyer le site en production et effectuer la maintenance le cas échéant",
 		],
-		stack: ["Next.js", "Typescript", "Sequelize", "SaSS Modules"],
+		stack: ["Next.js", "Typescript", "React.js", "Javascript", "Sequelize", "MySQL", "SaSS"],
 	},
 	{
 		name: "Bastien Mélicque – Portfolio",
@@ -52,7 +52,7 @@ export const PROJECTS: Project[] = [
 			"Mettre en place un formulaire de contact simple d'utilisation",
 			"Envoyer en production",
 		],
-		stack: ["Next.js", "Typescript", "Tailwind CSS"],
+		stack: ["Next.js", "Typescript", "React.js", "Javascript", "Tailwind CSS"],
 	},
 	{
 		name: "Qere – Dictionnaire bilingue",
@@ -70,6 +70,6 @@ export const PROJECTS: Project[] = [
 			"Concevoir l'architecture de la base de données, et celle de tout le projet",
 			"Envoyer en production et effectuer la maintenance",
 		],
-		stack: ["HTML", "CSS", "PHP", "Javascript"],
+		stack: ["HTML", "CSS", "PHP", "MySQL", "Javascript"],
 	},
 ];

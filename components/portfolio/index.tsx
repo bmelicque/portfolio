@@ -2,6 +2,7 @@ import { useEffect, useReducer, useRef, useState } from "react";
 import { Project, PROJECTS } from "../../lib/data/projects";
 import { Heading } from "../headings";
 import ArrowButton from "./arrowButton";
+import BulletButton from "./bulletButton";
 import ProjectCard from "./projectCard";
 
 const SCALE = {
@@ -16,16 +17,20 @@ const OPACITY = {
 export enum ACTIONS {
 	DISPLAY_NEXT = "NEXT",
 	DISPLAY_PREV = "PREV",
+	DISPLAY_N = "N",
 }
 
 interface Action {
 	type: ACTIONS;
+	payload?: number;
 }
 
 interface State {
 	current: number;
 	items: Project[];
 }
+
+export type CarouselReducer = (state: State, action: Action) => State;
 
 const reducer = (state: State, action: Action) => {
 	const { current, items } = state;
@@ -36,6 +41,11 @@ const reducer = (state: State, action: Action) => {
 				: state;
 		case ACTIONS.DISPLAY_PREV:
 			return current ? { ...state, current: current - 1 } : state;
+		case ACTIONS.DISPLAY_N:
+			const { payload } = action;
+			if (payload >= 0 && payload < items.length)
+				return { ...state, current: payload };
+			else return state;
 		default:
 			return state;
 	}
@@ -63,7 +73,20 @@ export default function Portfolio() {
 	return (
 		<section className="py-16 bg-gray-100">
 			<Heading>Mes réalisations</Heading>
-			<div className="container mx-auto relative" ref={carouselRef}>
+
+			<div className="flex justify-center gap-2">
+				{projects.map((item, index) => (
+					<BulletButton
+						key={index}
+						active={index === state.current}
+						onClick={() =>
+							dispatch({ type: ACTIONS.DISPLAY_N, payload: index })
+						}
+					/>
+				))}
+			</div>
+
+			<div className="container mx-auto mt-4 relative" ref={carouselRef}>
 				<div
 					id="carousel"
 					className="flex duration-300"
