@@ -9,8 +9,8 @@ import useScroll from "../hooks/useScroll";
 
 interface NavContext {
 	refs: any;
-    currentSectionName: string;
-	scrollToRef: (sectionName: string) => MouseEventHandler;
+	currentSectionName: string;
+	scrollToRef: (sectionName: string, params?: any) => MouseEventHandler;
 }
 
 const HEADER_MARGIN_SIZE = 32;
@@ -26,7 +26,8 @@ export const NavContext = createContext<NavContext>(undefined!);
 
 export default function NavProvider({ children }: React.PropsWithChildren<{}>) {
 	const sectionNames = Object.values(SECTION_NAMES);
-	const [currentSectionName, setCurrentSectionName] = useState<string>(undefined);
+	const [currentSectionName, setCurrentSectionName] =
+		useState<string>(undefined);
 	const refs = useRef(sectionNames);
 	const windowScroll = useScroll();
 
@@ -42,13 +43,16 @@ export default function NavProvider({ children }: React.PropsWithChildren<{}>) {
 	);
 
 	const scrollToRef =
-		(sectionName: string): MouseEventHandler =>
+		(
+			sectionName: string,
+			params?: any
+		): MouseEventHandler =>
 		(e) => {
 			e.preventDefault();
-			refs.current[sectionName].scrollIntoView();
+			refs.current[sectionName].scrollIntoView(params);
 		};
 
-    // This effect keeps track of the currently displayed section
+	// This effect keeps track of the currently displayed section
 	useEffect(() => {
 		const sectionsOffsets = sectionNames.map((section) => {
 			if (refs.current[section])
@@ -63,7 +67,9 @@ export default function NavProvider({ children }: React.PropsWithChildren<{}>) {
 	}, [windowScroll, refs, sectionNames]);
 
 	return (
-		<NavContext.Provider value={{ refs: refGetters, currentSectionName, scrollToRef }}>
+		<NavContext.Provider
+			value={{ refs: refGetters, currentSectionName, scrollToRef }}
+		>
 			{children}
 		</NavContext.Provider>
 	);
