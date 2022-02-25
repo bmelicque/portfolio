@@ -1,53 +1,11 @@
-import { MouseEventHandler, useContext, useState } from "react";
-import useWindowDimensions from "../lib/hooks/useWindowDimensions";
-import { NavContext, SECTION_NAMES } from "../lib/context/navContext";
-
-interface NavLink {
-	href: string;
-	active?: boolean;
-	onClick: MouseEventHandler;
-	children: React.ReactChild;
-}
-
-interface HamburgerBar {
-	transform?: string;
-}
-
-interface Hamburger {
-	active?: boolean;
-}
+import { useContext, useState } from "react";
+import { NavContext, SECTION_NAMES } from '../../lib/context/navContext';
+import useWindowDimensions from '../../lib/hooks/useWindowDimensions';
+import Hamburger from './hamburger';
+import NavLink from "./navLink";
 
 const BREAKPOINT = 768;
 const ANCHOR_HEIGHT = 48;
-
-function Bar({ transform }: HamburgerBar) {
-	return (
-		<span
-			className={"block w-full h-0.5 bg-white duration-200 " + transform}
-		></span>
-	);
-}
-
-function Hamburger({ active }: Hamburger) {
-	return (
-		<i className="flex flex-col w-7 gap-1.5">
-			<Bar transform={active ? "translate-y-2 rotate-45" : ""} />
-			<Bar transform={active ? "scale-0" : ""} />
-			<Bar transform={active ? "-translate-y-2 -rotate-45" : ""} />
-		</i>
-	);
-}
-
-function NavLink({ href, active, onClick, children }: NavLink) {
-	const className =
-		" px-2 md:py-2 pr-8 md:pr-2 h-12 flex items-center cursor-pointer hover:bg-primary-dark border-b-2 " +
-		(active ? "border-b-white" : "border-b-transparent");
-	return (
-		<a href={href} onClick={onClick} className={className}>
-			{children}
-		</a>
-	);
-}
 
 export default function Header() {
 	const [isExpanded, setIsExpanded] = useState(false);
