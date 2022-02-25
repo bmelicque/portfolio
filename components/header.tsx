@@ -4,6 +4,7 @@ import { NavContext, SECTION_NAMES } from "../lib/context/navContext";
 
 interface NavLink {
 	href: string;
+	active?: boolean;
 	onClick: MouseEventHandler;
 	children: React.ReactChild;
 }
@@ -37,13 +38,12 @@ function Hamburger({ active }: Hamburger) {
 	);
 }
 
-function NavLink({ href, onClick, children }: NavLink) {
+function NavLink({ href, active, onClick, children }: NavLink) {
+	const className =
+		" px-2 md:py-2 pr-8 md:pr-2 h-12 flex items-center cursor-pointer hover:bg-primary-dark border-b-2 " +
+		(active ? "border-b-white" : "border-b-transparent");
 	return (
-		<a
-			href={href}
-			onClick={onClick}
-			className="px-2 md:py-2 pr-8 md:pr-2 h-12 flex items-center cursor-pointer hover:bg-primary-dark"
-		>
+		<a href={href} onClick={onClick} className={className}>
 			{children}
 		</a>
 	);
@@ -51,7 +51,7 @@ function NavLink({ href, onClick, children }: NavLink) {
 
 export default function Header() {
 	const [isExpanded, setIsExpanded] = useState(false);
-	const { scrollToRef } = useContext(NavContext);
+	const { currentSectionName, scrollToRef } = useContext(NavContext);
 	const { windowWidth } = useWindowDimensions();
 
 	return (
@@ -74,13 +74,25 @@ export default function Header() {
 								: 0,
 					}}
 				>
-					<NavLink href="#Accueil" onClick={scrollToRef(SECTION_NAMES.banner)}>
+					<NavLink
+						href="#Accueil"
+						active={currentSectionName === SECTION_NAMES.banner}
+						onClick={scrollToRef(SECTION_NAMES.banner)}
+					>
 						Accueil
 					</NavLink>
-					<NavLink href="#Compétences" onClick={scrollToRef(SECTION_NAMES.profile)}>
+					<NavLink
+						href="#Compétences"
+						active={currentSectionName === SECTION_NAMES.profile}
+						onClick={scrollToRef(SECTION_NAMES.profile)}
+					>
 						Compétences
 					</NavLink>
-					<NavLink href="#Réalisations" onClick={scrollToRef(SECTION_NAMES.portfolio)}>
+					<NavLink
+						href="#Réalisations"
+						active={currentSectionName === SECTION_NAMES.portfolio}
+						onClick={scrollToRef(SECTION_NAMES.portfolio)}
+					>
 						Réalisations
 					</NavLink>
 					<NavLink href="#Contact" onClick={scrollToRef(SECTION_NAMES.contact)}>

@@ -6,7 +6,10 @@ export default function useViewport(ref: MutableRefObject<HTMLElement>) {
 
 	useEffect(() => {
 		function handleScroll() {
-			const { top, bottom } = ref?.current?.getBoundingClientRect?.();
+			const { top, bottom } = ref?.current?.getBoundingClientRect?.() ?? {
+				top: undefined,
+				bottom: undefined,
+			};
 			const isInViewPort = top > 0 && bottom < window.innerHeight;
 			setVisible(isInViewPort);
 		}

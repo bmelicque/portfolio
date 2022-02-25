@@ -11,7 +11,6 @@ interface Props {
 export default function ProjectCard({
 	project: { name, address, github, image, context, missions, stack },
 }: Props) {
-	console.log(github);
 	return (
 		<div className="flex flex-col items-start">
 			<div className="ml-24">
