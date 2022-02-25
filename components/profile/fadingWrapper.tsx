@@ -8,7 +8,7 @@ export default function FadingWrapper({ children }: { children: React.ReactEleme
 	return (
 		<span
 			ref={ref}
-			className="inline-block duration-500 delay-200"
+			className="block duration-500 delay-100"
 			style={{
 				transform: `translateX(${visible ? 0 : "1rem"})
 					translateY(${visible ? 0 : "-0.5rem"})`,
