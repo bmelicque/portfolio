@@ -16,7 +16,7 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
 	{
-		name: "Waleed Hafid – Site vitrine",
+		name: "Waleed Hafid – Site vitrine avec panneau admin",
 		address: "https://waleedhafid.fr",
 		image: {
 			src: "/assets/images/waleedhafid.png",
