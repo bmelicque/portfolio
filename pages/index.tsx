@@ -1,10 +1,11 @@
+import { useContext } from "react";
+import { NavContext } from "../lib/context/navContext";
 import Head from "next/head";
 import Banner from "../components/banner";
 import Header from "../components/header";
 import Portfolio from "../components/portfolio";
 import Profile from "../components/profile";
-import { useContext } from "react";
-import { NavContext } from "../lib/context/navContext";
+import Contact from "../components/contact";
 
 export default function Home() {
 	const { refs } = useContext(NavContext);
@@ -25,6 +26,9 @@ export default function Home() {
 			</div>
 			<div ref={refs.portfolio}>
 				<Portfolio />
+			</div>
+			<div ref={refs.contact}>
+				<Contact />
 			</div>
 		</div>
 	);
