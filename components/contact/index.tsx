@@ -2,6 +2,8 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { Heading } from "../headings";
 import Fieldset from "./fieldset";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const ERROR_MESSAGES = {
 	EMAIL: "Email invalide",
@@ -9,6 +11,19 @@ const ERROR_MESSAGES = {
 };
 
 export default function Contact() {
+	const formRef = useRef();
+	const [sent, setSent] = useState(false);
+
+	const sendEmail = () => {
+		emailjs.sendForm(
+			"service_shv6hpv",
+			"template_um6hhmd",
+			formRef.current,
+			"27rBJ4PeBglO0NWC6"
+		);
+		setSent(true);
+	};
+
 	return (
 		<section className="py-20 px-4">
 			<Heading>Me contacter</Heading>
@@ -22,12 +37,13 @@ export default function Contact() {
 					subject: Yup.string().required(ERROR_MESSAGES.REQUIRED),
 					message: Yup.string().required(ERROR_MESSAGES.REQUIRED),
 				})}
-				onSubmit={(values) => {
-					console.log(values);
-				}}
+				onSubmit={sendEmail}
 			>
 				{(formik) => (
-					<Form className="grid grid-cols-1 md:grid-cols-2 gap-6 w-screen max-w-2xl mx-auto">
+					<Form
+						ref={formRef}
+						className="grid grid-cols-1 md:grid-cols-2 gap-6 w-screen max-w-2xl mx-auto"
+					>
 						<Fieldset
 							name="name"
 							label="Nom"
@@ -63,9 +79,10 @@ export default function Contact() {
 						<div className="submit-container col-span-2 mt-4 flex justify-center">
 							<button
 								type="submit"
-								className="bg-primary hover:bg-primary-dark text-white  py-2 px-6 self-center rounded text-base uppercase"
+								className={`${sent ? "bg-green-600" : "bg-primary hover:bg-primary-dark"} text-white  py-2 px-6 self-center rounded text-base uppercase`}
+								disabled={sent}
 							>
-								Envoyer
+								{sent ? "Message envoyé" : "Envoyer un message"}
 							</button>
 						</div>
 					</Form>
