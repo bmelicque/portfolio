@@ -26,19 +26,23 @@ export default function Contact() {
 					console.log(values);
 				}}
 			>
-				{() => (
-					<Form className="grid grid-cols-2 gap-6 w-screen max-w-2xl mx-auto">
+				{(formik) => (
+					<Form className="grid grid-cols-1 md:grid-cols-2 gap-6 w-screen max-w-2xl mx-auto">
 						<Fieldset
 							name="name"
 							label="Nom"
 							type="text"
 							placeholder="Votre nom"
+							className="col-span-2 md:col-span-1"
+							error={formik.touched.name && !!formik.errors.name}
 						/>
 						<Fieldset
 							name="email"
 							label="Adresse email"
 							type="email"
 							placeholder="Votre adresse email"
+							className="col-span-2 md:col-span-1"
+							error={formik.touched.email && !!formik.errors.email}
 						/>
 						<Fieldset
 							name="subject"
@@ -46,6 +50,7 @@ export default function Contact() {
 							type="text"
 							placeholder="L'objet de votre message"
 							className="col-span-2"
+							error={formik.touched.subject && !!formik.errors.subject}
 						/>
 						<Fieldset
 							name="message"
@@ -53,8 +58,9 @@ export default function Contact() {
 							type="textarea"
 							placeholder="Parlez-moi de votre projet..."
 							className="col-span-2 min-h-[12em]"
+							error={formik.touched.message && !!formik.errors.message}
 						/>
-						<div className="submit-container col-span-2 flex justify-center">
+						<div className="submit-container col-span-2 mt-4 flex justify-center">
 							<button
 								type="submit"
 								className="bg-primary hover:bg-primary-dark text-white  py-2 px-6 self-center rounded text-base uppercase"
