@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { NavContext, SECTION_NAMES } from '../../lib/context/navContext';
-import useWindowDimensions from '../../lib/hooks/useWindowDimensions';
-import Hamburger from './hamburger';
+import { NavContext, SECTION_NAMES } from "../../lib/context/navContext";
+import useWindowDimensions from "../../lib/hooks/useWindowDimensions";
+import Hamburger from "./hamburger";
 import NavLink from "./navLink";
 
 const BREAKPOINT = 768;
@@ -53,7 +53,11 @@ export default function Header() {
 					>
 						Réalisations
 					</NavLink>
-					<NavLink href="#Contact" onClick={scrollToRef(SECTION_NAMES.contact)}>
+					<NavLink
+						href="#Contact"
+						active={currentSectionName === SECTION_NAMES.contact}
+						onClick={scrollToRef(SECTION_NAMES.contact)}
+					>
 						Contact
 					</NavLink>
 				</nav>

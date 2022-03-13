@@ -61,7 +61,7 @@ export default function NavProvider({ children }: React.PropsWithChildren<{}>) {
 
 		// The visible/current section is the last one with a non-positive index (with some margin to account for the header)
 		const negativeOffsets = sectionsOffsets.filter(
-			(offset) => offset <= HEADER_MARGIN_SIZE
+			(offset) => offset <= window.innerHeight / 4
 		);
 		setCurrentSectionName(refs.current[negativeOffsets.length - 1]);
 	}, [windowScroll, refs, sectionNames]);
