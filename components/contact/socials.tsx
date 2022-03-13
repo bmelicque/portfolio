@@ -7,7 +7,7 @@ export default function Socials() {
 	return (
 		<div className="flex justify-center gap-2 mt-12">
 			{SOCIALS.map((social) => (
-				<a key={social.name} href={social.url} title={social.name} className="p-2 hover:animate-pulse">
+				<a key={social.name} href={social.url} title={social.name} className="p-2 hover:scale-110 hover:opacity-90 duration-200">
 					<Image
 						width={ICON_SIZE}
 						height={ICON_SIZE}
