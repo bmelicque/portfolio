@@ -4,6 +4,7 @@ import { Heading } from "../headings";
 import Fieldset from "./fieldset";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import Socials from "./socials";
 
 const ERROR_MESSAGES = {
 	EMAIL: "Email invalide",
@@ -79,7 +80,9 @@ export default function Contact() {
 						<div className="submit-container col-span-2 mt-4 flex justify-center">
 							<button
 								type="submit"
-								className={`${sent ? "bg-green-600" : "bg-primary hover:bg-primary-dark"} text-white  py-2 px-6 self-center rounded text-base uppercase`}
+								className={`${
+									sent ? "bg-green-600" : "bg-primary hover:bg-primary-dark"
+								} text-white  py-4 px-6 self-center rounded text-base uppercase`}
 								disabled={sent}
 							>
 								{sent ? "Message envoyé" : "Envoyer un message"}
@@ -88,6 +91,8 @@ export default function Contact() {
 					</Form>
 				)}
 			</Formik>
+
+			<Socials />
 		</section>
 	);
 }
