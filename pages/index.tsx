@@ -6,6 +6,7 @@ import Header from "../components/header";
 import Portfolio from "../components/portfolio";
 import Profile from "../components/profile";
 import Contact from "../components/contact";
+import Footer from "../components/footer";
 
 export default function Home() {
 	const { refs } = useContext(NavContext);
@@ -30,6 +31,7 @@ export default function Home() {
 			<div ref={refs.contact}>
 				<Contact />
 			</div>
+			<Footer />
 		</div>
 	);
 }
